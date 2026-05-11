@@ -1,26 +1,221 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ─── Fonts ─── */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-bengali: 'Noto Sans Bengali', sans-serif;
+
+  /* ─── Brand Colors ─── */
+  --color-primary: oklch(0.72 0.19 145);
+  --color-primary-foreground: oklch(0.08 0 0);
+  --color-primary-muted: oklch(0.72 0.19 145 / 0.15);
+  --color-primary-border: oklch(0.72 0.19 145 / 0.25);
+
+  --color-danger: oklch(0.65 0.22 27);
+  --color-danger-foreground: oklch(0.98 0 0);
+  --color-danger-muted: oklch(0.65 0.22 27 / 0.15);
+
+  --color-success: oklch(0.72 0.19 145);
+  --color-success-foreground: oklch(0.08 0 0);
+
+  --color-warning: oklch(0.75 0.18 75);
+  --color-warning-foreground: oklch(0.08 0 0);
+
+  /* ─── Background & Surface ─── */
+  --color-background: oklch(0.07 0 0);
+  --color-surface: oklch(0.1 0 0);
+  --color-surface-raised: oklch(0.13 0 0);
+  --color-surface-overlay: oklch(0.16 0 0);
+
+  /* ─── Text ─── */
+  --color-foreground: oklch(0.97 0 0);
+  --color-foreground-muted: oklch(0.65 0 0);
+  --color-foreground-subtle: oklch(0.45 0 0);
+
+  /* ─── Borders ─── */
+  --color-border: oklch(1 0 0 / 0.08);
+  --color-border-strong: oklch(1 0 0 / 0.15);
+
+  /* ─── shadcn compatible aliases ─── */
+  --color-card: oklch(0.1 0 0);
+  --color-card-foreground: oklch(0.97 0 0);
+  --color-muted: oklch(0.13 0 0);
+  --color-muted-foreground: oklch(0.65 0 0);
+  --color-accent: oklch(0.72 0.19 145 / 0.15);
+  --color-accent-foreground: oklch(0.72 0.19 145);
+  --color-input: oklch(0.13 0 0);
+  --color-ring: oklch(0.72 0.19 145 / 0.5);
+  --color-destructive: oklch(0.65 0.22 27);
+  --color-destructive-foreground: oklch(0.98 0 0);
+
+  /* ─── Radius ─── */
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* ─── Breakpoints ─── */
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── Base Styles ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+  line-height: 1.6;
+}
+
+/* ─── Bengali Locale ─── */
+[lang='bn'] body,
+.font-bengali {
+  font-family: var(--font-bengali);
+}
+
+/* ─── Focus ─── */
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background-color: var(--color-primary-muted);
+  color: var(--color-primary);
+}
+
+/* ─── Scrollbar ─── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-strong);
+  border-radius: 999px;
+}
+
+/* ─── Typography Scale ─── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-foreground);
+}
+
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+}
+h2 {
+  font-size: clamp(1.375rem, 3vw, 2rem);
+}
+h3 {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+}
+h4 {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+p {
+  color: var(--color-foreground-muted);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ─── Hero Glow Utility ─── */
+.hero-glow {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      oklch(0.72 0.19 145 / 0.2),
+      transparent 70%
+    ),
+    var(--color-background);
+}
+
+.hero-glow-red {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      oklch(0.65 0.22 27 / 0.2),
+      transparent 70%
+    ),
+    var(--color-background);
+}
+
+/* ─── Card Surface ─── */
+.card-surface {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.card-surface-raised {
+  background-color: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* ─── Green Text Glow (for hero headline) ─── */
+.text-glow-green {
+  color: var(--color-primary);
+  text-shadow: 0 0 40px oklch(0.72 0.19 145 / 0.4);
+}
+
+/* ─── Print Styles ─── */
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  .no-print {
+    display: none !important;
+  }
 }
