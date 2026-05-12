@@ -12,12 +12,12 @@ export default function HeroSection({ locale }: HeroSectionProps) {
 
   return (
     <section className="hero-glow relative flex w-full justify-center overflow-hidden">
-      <div className="container flex w-full flex-col items-center pt-20 pb-16 sm:pt-24 sm:pb-20 lg:pt-32 lg:pb-24">
-        {/* ────────────────────────────────
-            TEXT BLOCK
-        ──────────────────────────────── */}
+      {/* Explicit space below sticky header */}
+      <div className="container flex w-full flex-col items-center">
+        <div className="h-8 sm:h-10 lg:h-14" aria-hidden="true" />
+
+        {/* ---------- TEXT ---------- */}
         <div className="flex w-full max-w-[760px] flex-col items-center text-center">
-          {/* Badge */}
           <span
             className="inline-flex items-center rounded-full border px-4 py-1.5 text-[11px] font-semibold tracking-wider text-white/55 uppercase"
             style={{
@@ -28,18 +28,15 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             {t.badge}
           </span>
 
-          {/* Headline */}
           <h1 className="mt-7 font-bold tracking-tight sm:mt-8">
             <span className="text-white">{t.line1} </span>
             <span className="text-glow-green">{t.highlight}</span>
           </h1>
 
-          {/* Subtitle */}
           <p className="mt-5 max-w-lg text-base leading-relaxed text-white/40 sm:mt-6 sm:text-lg">
             {t.sub}
           </p>
 
-          {/* CTA */}
           <div className="mt-9 sm:mt-10">
             <Link
               href={`/${localeKey}/emi-calculator`}
@@ -60,7 +57,6 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             </Link>
           </div>
 
-          {/* Trust pills */}
           <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
             {t.trustPoints.map((point) => (
               <span
@@ -77,11 +73,8 @@ export default function HeroSection({ locale }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* ────────────────────────────────
-            CALCULATOR MOCKUP
-        ──────────────────────────────── */}
-        <div className="relative mt-16 w-full max-w-[920px] sm:mt-20 lg:mt-24">
-          {/* Glow */}
+        {/* ---------- MOCKUP ---------- */}
+        <div className="relative mt-16 w-full max-w-[920px] pb-16 sm:mt-20 sm:pb-20 lg:mt-24 lg:pb-24">
           <div
             className="pointer-events-none absolute -inset-8 rounded-3xl blur-3xl lg:-inset-12"
             style={{
@@ -90,7 +83,6 @@ export default function HeroSection({ locale }: HeroSectionProps) {
             }}
           />
 
-          {/* Browser Frame */}
           <div
             className="relative overflow-hidden rounded-xl border shadow-2xl shadow-black/40 lg:rounded-2xl"
             style={{
@@ -98,7 +90,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
               backgroundColor: 'oklch(0.06 0 0)',
             }}
           >
-            {/* ── Browser Chrome ── */}
+            {/* Browser Chrome */}
             <div
               className="relative flex items-center justify-center border-b px-4 py-3"
               style={{
@@ -138,9 +130,8 @@ export default function HeroSection({ locale }: HeroSectionProps) {
               </div>
             </div>
 
-            {/* ── App Content ── */}
+            {/* App Content */}
             <div className="p-5 sm:p-7 lg:p-9">
-              {/* Page title inside mockup */}
               <div className="mb-7">
                 <div className="flex items-center gap-2.5">
                   <div
@@ -161,9 +152,8 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 </p>
               </div>
 
-              {/* Calculator layout */}
               <div className="grid gap-5 lg:grid-cols-2 lg:gap-6">
-                {/* LEFT: Inputs */}
+                {/* Left */}
                 <div className="flex flex-col gap-3.5">
                   {t.preview.fields.map((field, index) => (
                     <div
@@ -207,9 +197,8 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                   </div>
                 </div>
 
-                {/* RIGHT: Results */}
+                {/* Right */}
                 <div className="flex flex-col gap-3.5">
-                  {/* Main result */}
                   <div
                     className="rounded-xl border p-5"
                     style={{
@@ -231,7 +220,6 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                     </p>
                   </div>
 
-                  {/* Stats */}
                   <div className="grid grid-cols-2 gap-3.5">
                     {t.preview.stats.map((stat) => (
                       <div
@@ -242,9 +230,7 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                           backgroundColor: 'oklch(1 0 0 / 0.02)',
                         }}
                       >
-                        <p className="text-[11px] text-white/30">
-                          {stat.label}
-                        </p>
+                        <p className="text-[11px] text-white/30">{stat.label}</p>
                         <p className="mt-2 text-sm font-semibold text-white/75">
                           {stat.value}
                         </p>
@@ -252,7 +238,6 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                     ))}
                   </div>
 
-                  {/* Breakdown bar */}
                   <div
                     className="rounded-xl border p-4"
                     style={{
@@ -307,7 +292,6 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 </div>
               </div>
 
-              {/* ── Amortization Table ── */}
               <div className="mt-6">
                 <div
                   className="overflow-hidden rounded-xl border"
@@ -393,16 +377,14 @@ export default function HeroSection({ locale }: HeroSectionProps) {
                 </div>
               </div>
 
-              {/* Note */}
               <p className="mt-5 text-center text-[11px] leading-relaxed text-white/20">
                 {t.preview.note}
               </p>
             </div>
           </div>
 
-          {/* Bottom fade */}
           <div
-            className="pointer-events-none absolute right-0 bottom-0 left-0 h-52 rounded-b-xl lg:rounded-b-2xl"
+            className="pointer-events-none absolute bottom-0 left-0 right-0 h-52 rounded-b-xl lg:rounded-b-2xl"
             style={{
               background:
                 'linear-gradient(to top, oklch(0.07 0 0) 0%, oklch(0.07 0 0 / 0.95) 25%, oklch(0.07 0 0 / 0.5) 55%, transparent 100%)',
