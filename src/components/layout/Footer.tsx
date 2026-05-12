@@ -53,7 +53,7 @@ export default function Footer({ locale }: FooterProps) {
       className="mt-20 w-full border-t"
       style={{ borderColor: 'oklch(1 0 0 / 0.08)' }}
     >
-      <div className="mx-auto max-w-6xl px-4 py-12">
+      <div className="container py-12">
         {/* Top Row */}
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
           {/* Brand */}
